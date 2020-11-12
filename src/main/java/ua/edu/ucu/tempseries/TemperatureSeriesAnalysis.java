@@ -3,10 +3,11 @@ import java.lang.Math;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
+    private static final int defaultSize = 1;
+    private static final int dangerTemp = -273;
     private double[] temperatures;
     private int currSize;
     private int vacantSize;
-    private static final int defaultSize = 1;
 
     public TemperatureSeriesAnalysis() {
         temperatures = new double[defaultSize];
@@ -18,7 +19,7 @@ public class TemperatureSeriesAnalysis {
         currSize = temperatureSeries.length;
         temperatures = new double[currSize];
         for (int j = 0; j < currSize; j++) {
-            if (temperatureSeries[j] < -273) {
+            if (temperatureSeries[j] < dangerTemp) {
                 temperatures = new double[currSize];
                 throw new InputMismatchException();
             }
@@ -185,7 +186,7 @@ public class TemperatureSeriesAnalysis {
             currSize = temps.length;
             temperatures = new double[auxSize];
             for (int j = 0; j < currSize; j++) {
-                if (temps[j] >= -273) {
+                if (temps[j] >= dangerTemp) {
                     temperatures[j] = temps[j];
                     vacantSize -= 1;
                 }
@@ -208,7 +209,7 @@ public class TemperatureSeriesAnalysis {
                 myTemps[index] = temperatures[index];
             }
             for (int j = 0; j < temps.length; j++) {
-                if (temps[j] >= -273) {
+                if (temps[j] >= dangerTemp) {
                     myTemps[j + currSize] = temps[j];
                     vacantSize -= 1;
                 } else {
