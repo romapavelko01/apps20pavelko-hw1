@@ -3,23 +3,23 @@ import java.lang.Math;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
-    private static final int defaultSize = 1;
-    private static final int dangerTemp = -273;
+    private static final int defaultsize = 1;
+    private static final int dangertemp = -273;
     private double[] temperatures;
     private int currSize;
     private int vacantSize;
 
     public TemperatureSeriesAnalysis() {
-        temperatures = new double[defaultSize];
+        temperatures = new double[defaultsize];
         currSize = 0;
-        vacantSize = defaultSize;
+        vacantSize = defaultsize;
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         currSize = temperatureSeries.length;
         temperatures = new double[currSize];
         for (int j = 0; j < currSize; j++) {
-            if (temperatureSeries[j] < dangerTemp) {
+            if (temperatureSeries[j] < dangertemp) {
                 temperatures = new double[currSize];
                 throw new InputMismatchException();
             }
@@ -42,7 +42,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double average() {
-        if (currSize == 0){
+        if (currSize == 0) {
             throw new IllegalArgumentException();
         }
         double mySum = 0;
@@ -178,7 +178,7 @@ public class TemperatureSeriesAnalysis {
     public int addTemps(double... temps) {
         double[] oldTemperatures = temperatures;
         if (currSize == 0) {
-            int auxSize = defaultSize;
+            int auxSize = defaultsize;
             while (auxSize < temps.length) {
                 auxSize *= 2;
                 vacantSize *= 2;
@@ -186,13 +186,13 @@ public class TemperatureSeriesAnalysis {
             currSize = temps.length;
             temperatures = new double[auxSize];
             for (int j = 0; j < currSize; j++) {
-                if (temps[j] >= dangerTemp) {
+                if (temps[j] >= dangertemp) {
                     temperatures[j] = temps[j];
                     vacantSize -= 1;
                 }
                 else {
                     temperatures = oldTemperatures;
-                    vacantSize = defaultSize;
+                    vacantSize = defaultsize;
                     currSize = 0;
                     throw new InputMismatchException();
                 }
@@ -209,7 +209,7 @@ public class TemperatureSeriesAnalysis {
                 myTemps[index] = temperatures[index];
             }
             for (int j = 0; j < temps.length; j++) {
-                if (temps[j] >= dangerTemp) {
+                if (temps[j] >= dangertemp) {
                     myTemps[j + currSize] = temps[j];
                     vacantSize -= 1;
                 } else {
