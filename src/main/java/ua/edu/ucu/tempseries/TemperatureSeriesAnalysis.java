@@ -122,7 +122,7 @@ public class TemperatureSeriesAnalysis {
         while (index < currSize) {
             double myVal = Math.abs(temperatures[index] - tempValue);
             if (closestTempArr[1] > myVal ||
-                    (closestTempArr[0] < 0 && temperatures[index] > 0 && myVal == ClosestTempArr[1])) {
+                    (closestTempArr[0] < 0 && temperatures[index] > 0 && myVal == closestTempArr[1])) {
                 closestTempArr = new double[] {temperatures[index], myVal};
             }
             index += 1;
@@ -148,7 +148,7 @@ public class TemperatureSeriesAnalysis {
                 }
             }
         }
-        return MyArray;
+        return myArray;
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
