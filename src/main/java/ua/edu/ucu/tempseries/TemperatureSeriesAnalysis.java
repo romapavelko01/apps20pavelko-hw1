@@ -102,10 +102,10 @@ public class TemperatureSeriesAnalysis {
         double closestToZero = temperatures[0];
         int index = 1;
         while (index < currSize) {
-            if (Math.abs(temperatures[index]) < Math.abs(closestToZero) ||
-                    (temperatures[index] > 0
+            if (Math.abs(temperatures[index]) < Math.abs(closestToZero)
+                    || (temperatures[index] > 0
                             && closestToZero < 0
-                            && Math.abs(temperatures[index]) == Math.abs(closestToZero))){
+                            && Math.abs(temperatures[index]) == Math.abs(closestToZero))) {
                 closestToZero = temperatures[index];
             }
             index += 1;
@@ -121,8 +121,8 @@ public class TemperatureSeriesAnalysis {
         int index = 1;
         while (index < currSize) {
             double myVal = Math.abs(temperatures[index] - tempValue);
-            if (closestTempArr[1] > myVal ||
-                    (closestTempArr[0] < 0 && temperatures[index] > 0 && myVal == closestTempArr[1])) {
+            if (closestTempArr[1] > myVal
+                    || (closestTempArr[0] < 0 && temperatures[index] > 0 && myVal == closestTempArr[1])) {
                 closestTempArr = new double[] {temperatures[index], myVal};
             }
             index += 1;
