@@ -57,77 +57,77 @@ public class TemperatureSeriesAnalysis {
         if (currSize == 0) {
             throw new IllegalArgumentException();
         }
-        double Average = average();
-        double SumOfSquares = 0;
+        double average = average();
+        double sumOfSquares = 0;
         for (int i = 0; i < currSize; i++) {
-            SumOfSquares += Math.pow(temperatures[i] - Average, 2.0);
+            sumOfSquares += Math.pow(temperatures[i] - average, 2.0);
         }
-        return Math.pow(SumOfSquares/currSize, 0.5);
+        return Math.pow(sumOfSquares/currSize, 0.5);
     }
 
     public double min() {
         if (currSize == 0) {
             throw new IllegalArgumentException();
         }
-        double MyMin = temperatures[0];
-        int Index = 1;
-        while (Index < currSize) {
-            if (temperatures[Index] < MyMin) {
-                MyMin = temperatures[Index];
+        double myMin = temperatures[0];
+        int index = 1;
+        while (index < currSize) {
+            if (temperatures[index] < myMin) {
+                myMin = temperatures[index];
             }
-            Index += 1;
+            index += 1;
         }
-        return MyMin;
+        return myMin;
     }
 
     public double max() {
         if (currSize == 0) {
             throw new IllegalArgumentException();
         }
-        double MyMax = temperatures[0];
-        int Index = 1;
-        while (Index < currSize) {
-            if (temperatures[Index] > MyMax) {
-                MyMax = temperatures[Index];
+        double myMax = temperatures[0];
+        int index = 1;
+        while (index < currSize) {
+            if (temperatures[index] > myMax) {
+                myMax = temperatures[index];
             }
-            Index += 1;
+            index += 1;
         }
-        return MyMax;
+        return myMax;
     }
 
     public double findTempClosestToZero() {
         if (currSize == 0) {
             throw new IllegalArgumentException();
         }
-        double ClosestToZero = temperatures[0];
-        int Index = 1;
-        while (Index < currSize) {
-            if (Math.abs(temperatures[Index]) < Math.abs(ClosestToZero) ||
-                    (temperatures[Index] > 0
-                            && ClosestToZero < 0
-                            && Math.abs(temperatures[Index]) == Math.abs(ClosestToZero))){
-                ClosestToZero = temperatures[Index];
+        double closestToZero = temperatures[0];
+        int index = 1;
+        while (index < currSize) {
+            if (Math.abs(temperatures[index]) < Math.abs(closestToZero) ||
+                    (temperatures[index] > 0
+                            && closestToZero < 0
+                            && Math.abs(temperatures[index]) == Math.abs(closestToZero))){
+                closestToZero = temperatures[index];
             }
-            Index += 1;
+            index += 1;
         }
-        return ClosestToZero;
+        return closestToZero;
     }
 
     public double findTempClosestToValue(double tempValue) {
         if (currSize == 0) {
             throw new IllegalArgumentException();
         }
-        double[] ClosestTempArr = new double[] {temperatures[0], Math.abs(temperatures[0] - tempValue)};
-        int Index = 1;
-        while (Index < currSize) {
-            double myVal = Math.abs(temperatures[Index] - tempValue);
-            if (ClosestTempArr[1] > myVal ||
-                    (ClosestTempArr[0] < 0 && temperatures[Index] > 0 && myVal == ClosestTempArr[1])) {
-                ClosestTempArr = new double[] {temperatures[Index], myVal};
+        double[] closestTempArr = new double[] {temperatures[0], Math.abs(temperatures[0] - tempValue)};
+        int index = 1;
+        while (index < currSize) {
+            double myVal = Math.abs(temperatures[index] - tempValue);
+            if (closestTempArr[1] > myVal ||
+                    (closestTempArr[0] < 0 && temperatures[index] > 0 && myVal == ClosestTempArr[1])) {
+                closestTempArr = new double[] {temperatures[index], myVal};
             }
-            Index += 1;
+            index += 1;
         }
-        return ClosestTempArr[0];
+        return closestTempArr[0];
 
     }
 
@@ -138,12 +138,12 @@ public class TemperatureSeriesAnalysis {
                 counter += 1;
             }
         }
-        double[] MyArray = new double[counter];
+        double[] myArray = new double[counter];
         if (counter > 0) {
             int indexer = 0;
             for (int s = 0; s < currSize; s++) {
                 if (temperatures[s] < tempValue) {
-                    MyArray[indexer] = temperatures[s];
+                    myArray[indexer] = temperatures[s];
                     indexer += 1;
                 }
             }
@@ -158,17 +158,17 @@ public class TemperatureSeriesAnalysis {
                 counter += 1;
             }
         }
-        double[] Final = new double[counter];
+        double[] finalArr = new double[counter];
         if (counter > 0) {
             int indexer = 0;
             for (int c = 0; c < currSize; c++) {
                 if (temperatures[c] > tempValue) {
-                    Final[indexer] = temperatures[c];
+                    finalArr[indexer] = temperatures[c];
                     indexer += 1;
                 }
             }
         }
-        return Final;
+        return finalArr;
     }
 
     public TempSummaryStatistics summaryStatistics() {
