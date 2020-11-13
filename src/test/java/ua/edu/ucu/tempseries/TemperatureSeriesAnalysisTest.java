@@ -368,5 +368,35 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(expDeviation, actDeviation, 0.0001);
         assertEquals(expMax, actMax, 0.0001);
         assertEquals(expMin, actMin, 0.0001);
+
+        double[] anotherArr = {2.0, 3.5};
+        TemperatureSeriesAnalysis myAn = new TemperatureSeriesAnalysis(anotherArr);
+        TempSummaryStatistics anStats = new TempSummaryStatistics(myAn);
+        TemperatureSeriesAnalysis actAn = anStats.getMyAnalysis();
+        double expAvOne = myAn.average();
+        double expDevOne = myAn.deviation();
+        double expMaxOne = myAn.max();
+        double expMinOne = myAn.min();
+
+        double actAvOne = actAn.average();
+        double actDevOne = actAn.deviation();
+        double actMaxOne = actAn.max();
+        double actMinOne = actAn.min();
+
+        assertEquals(expAvOne, actAvOne, 0.0001);
+        assertEquals(expDevOne, actDevOne, 0.0001);
+        assertEquals(expMaxOne, actMaxOne, 0.0001);
+        assertEquals(expMinOne, actMinOne, 0.0001);
+
+        actAn.addTemps(3.9, -3.4);
+        double newAv = actAn.average();
+        double newDev = actAn.deviation();
+        double newMax = actAn.max();
+        double newMin = actAn.min();
+
+        assertNotEquals(actAvOne, newAv);
+        assertNotEquals(actDevOne, newDev);
+        assertNotEquals(actMaxOne, newMax);
+        assertNotEquals(actMinOne, newMin);
     }
 }
