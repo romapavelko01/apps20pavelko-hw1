@@ -1,5 +1,4 @@
 package ua.edu.ucu.tempseries;
-import java.lang.Math;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
