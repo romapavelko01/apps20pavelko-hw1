@@ -321,6 +321,16 @@ public class TemperatureSeriesAnalysisTest {
         anOne.addTemps(-300.0);
         double[] anOneNewArr = anOne.getTemperatures();
         Assert.assertArrayEquals(anTwoArr, anOneNewArr, 0.0001);
+
+        TemperatureSeriesAnalysis finalAn = new TemperatureSeriesAnalysis();
+        int expDefSize = 0;
+        double[] expFinalArray = finalAn.getTemperatures();
+        int actDefSize = finalAn.addTemps(280.0, 23.3, -280.0);
+        double[] actFinalArray = finalAn.getTemperatures();
+
+        assertEquals(expDefSize, actDefSize, 0.0001);
+
+        Assert.assertArrayEquals(expFinalArray, actFinalArray, 0.0001);
     }
 
     @Test
@@ -352,7 +362,6 @@ public class TemperatureSeriesAnalysisTest {
 
         assertEquals(expEmptyChangedSize, actEmptyChangedSize, 0.0001);
         Assert.assertArrayEquals(expEmptyChangedTemps, actEmptyChangedTemps, 0.0001);
-
     }
 
     @Test(expected = IllegalArgumentException.class)
