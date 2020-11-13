@@ -308,7 +308,19 @@ public class TemperatureSeriesAnalysisTest {
     public void testAddTempsBadValues() {
         double[] seriesOne = {220.0, 120.0};
         TemperatureSeriesAnalysis anOne = new TemperatureSeriesAnalysis(seriesOne);
-        anOne.addTemps(283.8, -283.8, -34);
+        TemperatureSeriesAnalysis anTwo = new TemperatureSeriesAnalysis(seriesOne);
+        anOne.addTemps(-34.6, 283.9, -283.8);
+        int mySizeOne = anOne.addTemps(35.6);
+        int mySizeTwo = anTwo.addTemps(35.6);
+        assertEquals(mySizeOne, mySizeTwo, 0.0001);
+
+        double[] anOneArr = anOne.getTemperatures();
+        double[] anTwoArr = anTwo.getTemperatures();
+        Assert.assertArrayEquals(anOneArr, anTwoArr, 0.0001);
+
+        anOne.addTemps(-300.0);
+        double[] anOneNewArr = anOne.getTemperatures();
+        Assert.assertArrayEquals(anTwoArr, anOneNewArr, 0.0001);
     }
 
     @Test
@@ -398,5 +410,24 @@ public class TemperatureSeriesAnalysisTest {
         assertNotEquals(actDevOne, newDev);
         assertNotEquals(actMaxOne, newMax);
         assertNotEquals(actMinOne, newMin);
+
+        double[] finalSeries = {3.5, 6.9, 8.9};
+        TemperatureSeriesAnalysis finalAn = new TemperatureSeriesAnalysis(finalSeries);
+        TempSummaryStatistics finalStats = finalAn.summaryStatistics();
+
+        double finalExpAv = finalAn.average();
+        double finalExpDev = finalAn.deviation();
+        double finalExpMax = finalAn.max();
+        double finalExpMin = finalAn.min();
+
+        double finalActAv = finalStats.getAvgTemp();
+        double finalActDev = finalStats.getDevTemp();
+        double finalActMax = finalStats.getMaxTemp();
+        double finalActMin = finalStats.getMinTemp();
+
+        assertEquals(finalExpAv, finalActAv, 0.0001);
+        assertEquals(finalExpDev, finalActDev, 0.0001);
+        assertEquals(finalExpMax, finalActMax, 0.0001);
+        assertEquals(finalExpMin, finalActMin, 0.0001);
     }
 }
